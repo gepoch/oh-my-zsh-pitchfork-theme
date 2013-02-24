@@ -21,4 +21,4 @@ Here's what's currently supported:
 
 ╰────────▸ 
 
-Depends on the oh-my-zsh (virtualenv)[https://github.com/gepoch/oh-my-zsh-virtualenv] and (dirstack)[https://github.com/gepoch/oh-my-zsh-dirstack] plugins.
+Depends on the oh-my-zsh [virtualenv](https://github.com/gepoch/oh-my-zsh-virtualenv) and [dirstack](https://github.com/gepoch/oh-my-zsh-dirstack) plugins.
