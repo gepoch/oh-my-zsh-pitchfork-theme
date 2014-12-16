@@ -21,12 +21,12 @@ if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
     MODE_INDICATOR="%{$fg_bold[red]%}❮%{$reset_color%}%{$fg[red]%}❮❮%{$reset_color%}"
     local return_status="%{$fg_bold[cyan]%}%(?..↩)%{$reset_color%}"
 
-    PROMPT='%{$fg_bold[cyan]%}╭%{$reset_color%}%{$fg[cyan]%}$HOSTNAME_STRING%{$reset_color%}%{$fg_bold[cyan]%}▹%{$reset_color%} %{$fg[blue]%}%~%{$reset_color%}$(dirstack_prompt_info)$(git_prompt_info)$(git_prompt_status)$(svn_prompt_info)$(virtualenv_prompt_info)
-%{$fg_bold[cyan]%}╰$PROMPT_LINE▸%{$reset_color%} '
+    PROMPT='%{$fg_bold[cyan]%}╭%{$reset_color%}%{$fg[cyan]%}$HOSTNAME_STRING%{$reset_color%}%{$fg_bold[cyan]%}%{$reset_color%} %{$fg[blue]%}%~%{$reset_color%}$(dirstack_prompt_info)$(git_prompt_info)$(git_prompt_status)$(svn_prompt_info)$(virtualenv_prompt_info)
+%{$fg_bold[cyan]%}╰$PROMPT_LINE%{$reset_color%} '
 
     PRE_PREFIX="
 %{$fg_bold[cyan]%}├$LEFT_PADDING%{$reset_color%}%{$fg[cyan]%}"
-    POST_PREFIX="%{$reset_color%}%{$fg_bold[cyan]%}$RIGHT_PADDING▹%{$reset_color%} %{$fg[blue]%}"
+    POST_PREFIX="%{$reset_color%}%{$fg_bold[cyan]%}$RIGHT_PADDING%{$reset_color%} %{$fg[blue]%}"
     SUFFIX="%{$reset_color%}"
 
   # VC prompt info.
@@ -51,7 +51,7 @@ if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
     ZSH_THEME_DIRSTACK_PROMPT_SUFFIX="%{$reset_color%}"
     ZSH_THEME_DIRSTACK_PROMPT_DIRTY=""
     ZSH_THEME_DIRSTACK_PROMPT_CLEAN=""
-    
+
     ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%} added"
     ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[red]%} modified"
     ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%} untracked"
@@ -65,6 +65,6 @@ if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
 
 
 
-else 
+else
     PROMPT='❯ '
 fi
