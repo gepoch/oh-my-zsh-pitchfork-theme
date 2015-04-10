@@ -1,8 +1,28 @@
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 #          FILE:  pitchfork.zsh-theme
 #   DESCRIPTION:  oh-my-zsh theme file.
 #        AUTHOR:  George Marchin (geomysterio@gmail.com)
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+
+# Classic
+TOPROOT='╭'
+MIDROOT='├'
+BOTROOT='╰'
+CONNECTOR='─'
+BOUNDARY=' '
+FORKCOLOR="%{$fg_bold[blue]%}"
+FORKTEXTCOLOR="%{$fg[red]%}"
+TEXTCOLOR=
+
+# Agnoster
+# TOPROOT=''
+# MIDROOT=''
+# BOTROOT=''
+# CONNECTOR=' '
+# BOUNDARY=' '
+# FORKCOLOR="%{$fg_bold[black]$bg[blue]%}"
+# FORKTEXTCOLOR="%{$fg_bold[black]$bg[blue]%}"
+
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
   HOSTNAME_STRING="$(hostname)"
   HOSTNAME_LENGTH="${#HOSTNAME_STRING}"
@@ -11,22 +31,24 @@ if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
   if [ "3" -lt "$HOSTNAME_LENGTH" ]
   then
     # floor(l/2) characters of padding.
-    LEFT_PADDING=$(for i in $(seq $((($HOSTNAME_LENGTH/2)-1))); do echo -n '─'; done)
+    LEFT_PADDING=$(for i in $(seq $((($HOSTNAME_LENGTH/2)-1))); do echo -n $CONNECTOR; done)
     # ceil(l/2) characters of padding.
-    RIGHT_PADDING=$(for i in $(seq $(((($HOSTNAME_LENGTH+1)/2)-2))); do echo -n '─'; done)
+    RIGHT_PADDING=$(for i in $(seq $(((($HOSTNAME_LENGTH+1)/2)-2))); do echo -n $CONNECTOR; done)
   fi
 
-  PROMPT_LINE="$LEFT_PADDING───$RIGHT_PADDING"
+  PROMPT_LINE="$LEFT_PADDING$CONNECTOR$CONNECTOR$CONNECTOR$RIGHT_PADDING"
 
   MODE_INDICATOR="%{$fg_bold[red]%}❮%{$reset_color%}%{$fg[red]%}❮❮%{$reset_color%}"
-  local return_status="%{$fg_bold[blue]%}%(?..↩)%{$reset_color%}"
+  local return_status="$FORKCOLOR%(?..↩)%{$reset_color%}"
 
-  PROMPT='%{$fg_bold[blue]%}╭%{$reset_color%}%{$fg[blue]%}$HOSTNAME_STRING%{$fg_bold[blue]%}─%{$reset_color%}%{$fg_bold[cyan]%}%{$reset_color%} %{$fg[blue]%}%~%{$reset_color%}$(dirstack_prompt_info)$(git_prompt_info)$(git_prompt_status)$(svn_prompt_info)$(virtualenv_prompt_info)
-%{$fg_bold[blue]%}╰$PROMPT_LINE%{$fg_bold[blue]%}─%{$reset_color%} '
+  PROMPT='$FORKCOLOR$TOPROOT%{$reset_color%}$FORKTEXTCOLOR$HOSTNAME_STRING$FORKCOLOR$CONNECTOR%{$reset_color%}%{$fg_bold[cyan]%}%{$reset_color%}$BOUNDARY$FORKTEXTCOLOR%~%{$reset_color%}$(dirstack_prompt_info)$(git_prompt_info)$(git_prompt_status)$(svn_prompt_info)$(virtualenv_prompt_info)
+$FORKCOLOR$BOTROOT$PROMPT_LINE$FORKCOLOR$CONNECTOR%{$reset_color%}$BOUNDARY'
 
   PRE_PREFIX="
-%{$fg_bold[blue]%}├$LEFT_PADDING%{$reset_color%}%{$fg[blue]%}"
-  POST_PREFIX="%{$reset_color%}%{$fg_bold[blue]%}$RIGHT_PADDING%{$fg_bold[blue]%}─%{$reset_color%} %{$fg[blue]%}"
+$FORKCOLOR$MIDROOT$LEFT_PADDING%{$reset_color%}$FORKTEXTCOLOR"
+
+  POST_PREFIX="%{$reset_color%}$FORKCOLOR$RIGHT_PADDING$FORKCOLOR$CONNECTOR%{$reset_color%}$BOUNDARY$FORKTEXTCOLOR"
+
   SUFFIX="%{$reset_color%}"
 
 # VC prompt info.
